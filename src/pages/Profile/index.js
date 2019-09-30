@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Background from '~/components/Background';
 
+import { logout } from './../../store/modules/auth/actions';
 import { updateProfileRequest } from './../../store/modules/user/actions';
-import { Container, Form, FormInput, Separator, SubmitButton, Title } from './styles';
+import { Container, Form, FormInput, LogoutButton, Separator, SubmitButton, Title } from './styles';
 
 export default function Profile() {
   const profile = useSelector(state => state.user.profile);
@@ -37,6 +38,10 @@ export default function Profile() {
     };
 
     dispatch(updateProfileRequest(data));
+  }
+
+  function handleLogout() {
+    dispatch(logout());
   }
 
   return (
@@ -113,6 +118,7 @@ export default function Profile() {
           />
 
           <SubmitButton onPress={handleSubmit}>Atualizar perfil</SubmitButton>
+          <LogoutButton onPress={handleLogout}>Sair do GoBarber</LogoutButton>
         </Form>
       </Container>
     </Background>
