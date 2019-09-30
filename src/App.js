@@ -1,22 +1,11 @@
-import './config/ReactotronConfig';
-
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { useSelector } from 'react-redux';
 
-import Routes from './routes';
-import { persistor, store } from './store';
+import createRouter from './routes';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <StatusBar barStyle="light-content" backgroundColor="#7159c1" />
-        <Routes />
-      </PersistGate>
-    </Provider>
-  );
-};
+export default function src() {
+  const signed = useSelector(state => state.auth.signed);
+  const Routes = createRouter(signed);
 
-export default App;
+  return <Routes signed={signed} />;
+}

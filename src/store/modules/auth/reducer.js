@@ -6,6 +6,12 @@ const INITIAL_STATE = {token: null, signed: false, loading: false};
 export default function auth(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
+      case '@auth/SIGN_OUT': {
+        draft.token = '';
+        draft.signed = '';
+        break;
+      }
+
       case '@auth/SIGN_IN_REQUEST': {
         draft.loading = true;
         break;
@@ -19,7 +25,7 @@ export default function auth(state = INITIAL_STATE, action) {
       }
 
       case '@auth/SIGN_FAILURE': {
-        Alert.alert('Erro no login', action.payload.message);
+        Alert.alert('Mensagem', action.payload.message);
 
         draft.token = action.payload.token;
         draft.loading = false;
